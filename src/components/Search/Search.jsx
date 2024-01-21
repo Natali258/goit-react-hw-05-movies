@@ -2,6 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { FetchSearchMovies } from '../../services/api';
 import MovieList from 'components/MovieList/MovieList';
 import { useSearchParams } from 'react-router-dom';
+import {
+  StyleSearchBtn,
+  StyleSearchContainer,
+  StyleSearchForm,
+  StyleSearchInput,
+} from './Search.styled';
 
 const Search = () => {
   const [query, setQuery] = useState('');
@@ -29,13 +35,13 @@ const Search = () => {
   };
 
   return (
-    <div>
-      <form action="" onSubmit={handleSetParams}>
-        <input type="text" />
-        <button type="submit">Search</button>
-      </form>
+    <StyleSearchContainer>
+      <StyleSearchForm action="" onSubmit={handleSetParams}>
+        <StyleSearchInput type="text" />
+        <StyleSearchBtn type="submit">Search</StyleSearchBtn>
+      </StyleSearchForm>
       {searchMovies.length > 0 && <MovieList movies={searchMovies} />}
-    </div>
+    </StyleSearchContainer>
   );
 };
 

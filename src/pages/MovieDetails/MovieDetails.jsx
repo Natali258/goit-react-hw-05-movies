@@ -8,6 +8,7 @@ import {
   useParams,
 } from 'react-router-dom';
 import MoviesInfo from 'components/MoviesInfo/MoviesInfo';
+import styled from 'styled-components';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
@@ -22,15 +23,19 @@ const MovieDetails = () => {
 
   return (
     <div>
-      <Link to={btnGoBack}>&#10229;Go back</Link>
+      <StyleGoBack to={btnGoBack}>&#10229;Go back</StyleGoBack>
       <MoviesInfo movieDet={movieDet} />
       <h2>Additional Information</h2>
       <ul>
         <li>
-          <NavLink to="cast">Cast</NavLink>
+          <StyleLink to="cast" state={location.state}>
+            Cast...
+          </StyleLink>
         </li>
         <li>
-          <NavLink to="reviews">Reviews</NavLink>
+          <StyleLink to="reviews" state={location.state}>
+            Reviews...
+          </StyleLink>
         </li>
       </ul>
       <Outlet />
@@ -39,3 +44,28 @@ const MovieDetails = () => {
 };
 
 export default MovieDetails;
+
+const StyleLink = styled(NavLink)`
+  font-size: 20px;
+  font-weight: 700;
+  text-decoration: none;
+  color: #e64293a1;
+  &.active {
+    color: black;
+  }
+  &:hover {
+    color: #62687c;
+  }
+`;
+
+const StyleGoBack = styled(Link)`
+  display: block;
+  margin: 10px 5px;
+  font-size: 20px;
+  font-weight: 700;
+  text-decoration: none;
+  color: #e64293a1;
+  &.active {
+    color: #62687c;
+  }
+`;
