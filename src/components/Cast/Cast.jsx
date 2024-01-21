@@ -1,8 +1,14 @@
-import React from 'react';
-import { useOutletContext } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { FetchMoviesCredits } from '../../services/api';
+import { useParams } from 'react-router-dom';
 
 const Cast = () => {
-  const [actors] = useOutletContext();
+  const { movieId } = useParams();
+  const [actors, setActors] = useState([]);
+
+  useEffect(() => {
+    FetchMoviesCredits(movieId).then(res => setActors(res.cast));
+  }, [movieId]);
   return (
     <div>
       <ul>

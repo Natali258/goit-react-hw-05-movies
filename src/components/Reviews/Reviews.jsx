@@ -1,9 +1,17 @@
-import React from 'react';
-import { useOutletContext } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { FetchMoviesReviews } from '../../services/api';
 
 const Reviews = () => {
-  const [_, reviews] = useOutletContext();
-  return (
+  const { movieId } = useParams();
+  const [reviews, setReviews] = useState([]);
+  useEffect(() => {
+    FetchMoviesReviews(movieId).then(res => setReviews(res.results));
+  }, [movieId]);
+
+  return reviews.length === 0 ? (
+    <h3>We don't have any reviews for this movie!</h3>
+  ) : (
     <div>
       <ul>
         {reviews.map(review => (

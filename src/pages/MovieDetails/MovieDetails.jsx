@@ -1,54 +1,39 @@
 import React, { useEffect, useState } from 'react';
+import { FetchMoviesById } from '../../services/api';
 import {
-  FetchMoviesById,
-  FetchMoviesCredits,
-  FetchMoviesReviews,
-} from '../../services/api';
-import { NavLink, Outlet, useParams } from 'react-router-dom';
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useParams,
+} from 'react-router-dom';
 import MoviesInfo from 'components/MoviesInfo/MoviesInfo';
-import Cast from 'components/Cast/Cast';
-import Reviews from 'components/Reviews/Reviews';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
-
   const [movieDet, setMovieDet] = useState({});
-  const [actors, setActors] = useState([]);
-  const [reviews, setReviews] = useState([]);
+  const location = useLocation();
 
   useEffect(() => {
     FetchMoviesById(movieId).then(res => setMovieDet(res));
   }, [movieId]);
 
+  const btnGoBack = location.state?.from ?? '/movies';
+
   return (
     <div>
+      <Link to={btnGoBack}>&#10229;Go back</Link>
       <MoviesInfo movieDet={movieDet} />
       <h2>Additional Information</h2>
       <ul>
         <li>
-          <NavLink
-            to="cast"
-            onClick={() =>
-              FetchMoviesCredits(movieId).then(res => setActors(res.cast))
-            }
-          >
-            Cast
-          </NavLink>
+          <NavLink to="cast">Cast</NavLink>
         </li>
         <li>
-          <NavLink
-            to="reviews"
-            onClick={() =>
-              FetchMoviesReviews(movieId).then(res => setReviews(res.results))
-            }
-          >
-            Reviews
-          </NavLink>
+          <NavLink to="reviews">Reviews</NavLink>
         </li>
       </ul>
-      <Outlet context={[actors, reviews]} />
-      {/* {actors.length > 0 && <Cast actors={actors} />} */}
-      {/* {reviews.length > 0 && <Reviews reviews={reviews} />} */}
+      <Outlet />
     </div>
   );
 };
