@@ -1,14 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { FetchMoviesById } from '../../services/api';
-import {
-  Link,
-  NavLink,
-  Outlet,
-  useLocation,
-  useParams,
-} from 'react-router-dom';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
 import MoviesInfo from 'components/MoviesInfo/MoviesInfo';
-import styled from 'styled-components';
+import { StyleGoBack, StyleLink } from './MovieDetails.styled';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
@@ -44,28 +38,3 @@ const MovieDetails = () => {
 };
 
 export default MovieDetails;
-
-const StyleLink = styled(NavLink)`
-  font-size: 20px;
-  font-weight: 700;
-  text-decoration: none;
-  color: #e64293a1;
-  &.active {
-    color: black;
-  }
-  &:hover {
-    color: #62687c;
-  }
-`;
-
-const StyleGoBack = styled(Link)`
-  display: block;
-  margin: 10px 5px;
-  font-size: 20px;
-  font-weight: 700;
-  text-decoration: none;
-  color: #e64293a1;
-  &.active {
-    color: #62687c;
-  }
-`;

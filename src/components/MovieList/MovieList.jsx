@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { StyleMovieList } from './MovieList.styled';
-import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
+import { StyleMovieLink, StyleMovieList } from './MovieList.styled';
 
 const MovieList = ({ movies }) => {
   const location = useLocation();
@@ -24,15 +23,3 @@ const MovieList = ({ movies }) => {
 };
 
 export default MovieList;
-
-const StyleMovieLink = styled(Link)`
-  display: flex;
-  padding: 0;
-  color: #62687c;
-  font-size: 20px;
-  font-weight: 600;
-  text-decoration: none;
-  &:hover {
-    color: black;
-  }
-`;

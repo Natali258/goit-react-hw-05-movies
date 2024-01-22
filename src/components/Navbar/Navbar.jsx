@@ -1,7 +1,6 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { StyledNav } from './Navbar.styled';
-import styled from 'styled-components';
+
+import { StyleLink, StyledNav } from './Navbar.styled';
 
 const Navbar = () => {
   return (
@@ -15,13 +14,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-const StyleLink = styled(NavLink)`
-  font-size: 30px;
-  font-weight: 700;
-  text-decoration: none;
-  color: #62687c;
-  &.active {
-    color: black;
-  }
-`;
