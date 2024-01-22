@@ -1,10 +1,5 @@
 import styled from 'styled-components';
 
-export const StyleSearchContainer = styled.div`
-  display: block;
-  margin-top: 40px;
-`;
-
 export const StyleSearchForm = styled.form`
   display: flex;
   gap: 25px;
@@ -25,6 +20,7 @@ export const StyleSearchBtn = styled.button`
   background-color: #e64293a1;
   font-weight: bolt;
   font-size: 15px;
+  cursor: pointer;
   &:hover {
     background-color: #62687c;
     color: white;

@@ -1,47 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { FetchSearchMovies } from '../../services/api';
-import MovieList from 'components/MovieList/MovieList';
-import { useSearchParams } from 'react-router-dom';
+import React from 'react';
 import {
   StyleSearchBtn,
-  StyleSearchContainer,
   StyleSearchForm,
   StyleSearchInput,
 } from './Search.styled';
 
-const Search = () => {
-  const [query, setQuery] = useState('');
-  const [searchMovies, setSearchMovies] = useState([]);
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  useEffect(() => {
-    if (query !== '') {
-      FetchSearchMovies(query).then(res => setSearchMovies(res.results));
-      setQuery('');
-    }
-  }, [query]);
-
-  useEffect(() => {
-    const searchQuery = searchParams.get('query');
-    if (searchQuery !== null) {
-      setQuery(searchQuery);
-    }
-  }, [searchParams]);
-
-  const handleSetParams = e => {
+const Search = ({ handleSetParams }) => {
+  const handleSetParamsSearch = e => {
     e.preventDefault();
-    setQuery(e.target[0].value);
-    setSearchParams({ query: e.target[0].value });
+    handleSetParams({ query: e.target[0].value });
   };
 
   return (
-    <StyleSearchContainer>
-      <StyleSearchForm action="" onSubmit={handleSetParams}>
-        <StyleSearchInput type="text" />
-        <StyleSearchBtn type="submit">Search</StyleSearchBtn>
-      </StyleSearchForm>
-      {searchMovies.length > 0 && <MovieList movies={searchMovies} />}
-    </StyleSearchContainer>
+    <StyleSearchForm action="" onSubmit={handleSetParamsSearch}>
+      <StyleSearchInput type="text" />
+      <StyleSearchBtn type="submit">Search</StyleSearchBtn>
+    </StyleSearchForm>
   );
 };
 
